@@ -43,6 +43,24 @@ curl -i http://localhost:3000/me
 ```
 Expect a `200 OK` and a JSON body matching the required schema.
 
+## Docker
+Build and run locally:
+```bash
+docker build -t backend-stage0 .
+docker run --rm -p 3000:3000 \
+  -e MY_EMAIL="you@example.com" \
+  -e MY_NAME="Your Full Name" \
+  -e MY_STACK="Node.js/Express" \
+  -e PORT=3000 \
+  backend-stage0
+```
+Visit `http://localhost:3000/me`.
+
+### Back4App Notes
+- Provide your `Dockerfile` in the repo root.
+- Configure environment variables in Back4App: `MY_EMAIL`, `MY_NAME`, `MY_STACK`, and `PORT` if required.
+- Ensure the app listens on `process.env.PORT || 3000` (already implemented).
+
 ## Endpoint Contract
 Request:
 - Method: `GET`
