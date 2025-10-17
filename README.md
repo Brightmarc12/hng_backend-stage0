@@ -19,7 +19,7 @@ The endpoint returns a JSON object with the following structure:
     "name": "NKENGAFAC NGEFAC",
     "stack": "Node.js/Express with Docker on AWS"
   },
-  "timestamp": "2025-10-17T15:30:00.123Z",
+  "timestamp": "your current time in a UTC format",
   "fact": "A random cat fact appears here."
 }
 ```
