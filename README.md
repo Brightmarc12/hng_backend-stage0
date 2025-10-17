@@ -5,7 +5,7 @@ This is a RESTful API that returns my developer profile and a dynamic cat fact, 
 ## Live Endpoint
 
 You can access the live API here:
-`http://<YOUR_PUBLIC_IP_ADDRESS>:3000/me`
+`http://13.60.29.138:3000/me`
 
 ## API Response Structure
 
@@ -15,11 +15,11 @@ The endpoint returns a JSON object with the following structure:
 {
   "status": "success",
   "user": {
-    "email": "your.email@example.com",
-    "name": "Your Full Name",
+    "email": "ngefacbrightmarc@gmail.com",
+    "name": "NKENGAFAC NGEFAC",
     "stack": "Node.js/Express with Docker on AWS"
   },
-  "timestamp": "2025-10-17T14:30:00.123Z",
+  "timestamp": "2025-10-17T15:30:00.123Z",
   "fact": "A random cat fact appears here."
 }
 ```
@@ -30,14 +30,14 @@ This project is containerized with Docker, making it easy to run on any machine 
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/your-repo-name.git
-    cd your-repo-name
+    git clone https://github.com/Brightmarc12/hng_backend-stage0
+    cd hng_backend-stage0
     ```
 
 2.  **Create your environment file:**
     Create a file named `.env` in the project root and add the following variables:
     ```
-    MY_EMAIL=your.local-email@example.com
+    MY_EMAIL=your-local-email@example.com
     MY_NAME=Your Full Name
     MY_STACK=Node.js/Express (Local Docker)
     ```
