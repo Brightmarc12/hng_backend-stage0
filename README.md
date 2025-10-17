@@ -1,120 +1,62 @@
-# Backend Wizards — Stage 0: Dynamic Profile Endpoint
+# Backend Wizards - Stage 0 Task
 
-This project implements a simple REST API with a single endpoint `GET /me` that returns your profile and a dynamic cat fact fetched from the Cat Facts API.
+This is a RESTful API that returns my developer profile and a dynamic cat fact, deployed as a Docker container on an AWS EC2 instance.
 
-## Features
-- GET `/me` returns JSON with:
-  - `status: "success"`
-  - `user`: `{ email, name, stack }`
-  - `timestamp`: current UTC time in ISO 8601
-  - `fact`: random cat fact from `https://catfact.ninja/fact`
-- Uses async/await, timeout, no-store cache, and minimal CORS headers
-- Environment-driven `user` values via `process.env`
+## Live Endpoint
 
-## Tech Stack
-- Node.js (>= 18)
-- Express
-- Axios
-- dotenv
+You can access the live API here:
+`http://<YOUR_PUBLIC_IP_ADDRESS>:3000/me`
 
-## Getting Started (Local)
-1. Install dependencies:
-```bash
-npm install
-```
-2. Create a `.env` file in the project root with your details:
-```bash
-MY_EMAIL=you@example.com
-MY_NAME=Your Full Name
-MY_STACK=Node.js/Express
-PORT=3000
-```
-3. Start the server:
-```bash
-npm run start
-```
-Or run with file watching (Node 18+):
-```bash
-npm run dev
-```
-4. Test the endpoint:
-```bash
-curl -i http://localhost:3000/me
-```
-Expect a `200 OK` and a JSON body matching the required schema.
+## API Response Structure
 
-## Docker
-Build and run locally:
-```bash
-docker build -t backend-stage0 .
-docker run --rm -p 3000:3000 \
-  -e MY_EMAIL="you@example.com" \
-  -e MY_NAME="Your Full Name" \
-  -e MY_STACK="Node.js/Express" \
-  -e PORT=3000 \
-  backend-stage0
-```
-Visit `http://localhost:3000/me`.
+The endpoint returns a JSON object with the following structure:
 
-### Back4App Notes
-- Provide your `Dockerfile` in the repo root.
-- Configure environment variables in Back4App: `MY_EMAIL`, `MY_NAME`, `MY_STACK`, and `PORT` if required.
-- Ensure the app listens on `process.env.PORT || 3000` (already implemented).
-
-## Endpoint Contract
-Request:
-- Method: `GET`
-- Path: `/me`
-- Headers set by server:
-  - `Content-Type: application/json`
-  - `Cache-Control: no-store`
-  - `Access-Control-Allow-Origin: *`
-
-Response JSON structure:
 ```json
 {
   "status": "success",
   "user": {
-    "email": "<your email>",
-    "name": "<your full name>",
-    "stack": "<your backend stack>"
+    "email": "your.email@example.com",
+    "name": "Your Full Name",
+    "stack": "Node.js/Express with Docker on AWS"
   },
-  "timestamp": "<current UTC ISO 8601>",
-  "fact": "<random cat fact>"
+  "timestamp": "2025-10-17T14:30:00.123Z",
+  "fact": "A random cat fact appears here."
 }
 ```
 
-## Deployment (Railway)
-1. Create a new project on Railway (`https://railway.app`).
-2. Connect your GitHub repo or deploy from the CLI.
-3. Set environment variables in Railway:
-   - `MY_EMAIL`, `MY_NAME`, `MY_STACK`, `PORT` (Railway may set `PORT` automatically).
-4. Deploy and note your public URL.
-5. Verify:
-```bash
-curl -i https://<your-railway-domain>/me
-```
+## How to Run This Project Locally Using Docker
 
-## Troubleshooting
-- If the Cat Facts API times out or fails, the API returns `status: "success"` with a friendly fallback `fact` and a fresh `timestamp`.
-- Ensure machine or Railway allows outbound HTTPS to `catfact.ninja`.
-- Confirm `.env` variables are set in your environment.
+This project is containerized with Docker, making it easy to run on any machine with Docker installed.
 
-## Submission Steps (Slack)
-1. Verify your server works from multiple networks if possible.
-2. Go to Slack `#track-backend`.
-3. Run the command:
-```
-/stage-zero-backend
-```
-4. Submit the following:
-   - Server URL: `http://your-ip-or-domain/me`
-   - GitHub repository link
-   - Your full name
-   - Your email
-   - Stack
-5. Check Thanos bot for success/error after submission.
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-username/your-repo-name.git
+    cd your-repo-name
+    ```
 
-## Notes
-- This project avoids external dev dependencies; `npm run dev` uses `node --watch` (Node 18+).
-- `engines` in `package.json` specifies Node 18+ for consistency.
+2.  **Create your environment file:**
+    Create a file named `.env` in the project root and add the following variables:
+    ```
+    MY_EMAIL=your.local-email@example.com
+    MY_NAME=Your Full Name
+    MY_STACK=Node.js/Express (Local Docker)
+    ```
+
+3.  **Build the Docker image:**
+    ```bash
+    docker build -t my-profile-app .
+    ```
+
+4.  **Run the Docker container:**
+    ```bash
+    docker run -p 3000:3000 --env-file .env my-profile-app
+    ```
+
+5.  The application will be available at `http://localhost:3000/me`.
+
+## Technology Stack
+
+*   **Backend:** Node.js, Express.js
+*   **API Client:** Axios
+*   **Containerization:** Docker
+*   **Deployment:** AWS EC2
