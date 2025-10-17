@@ -57,6 +57,5 @@ This project is containerized with Docker, making it easy to run on any machine 
 ## Technology Stack
 
 *   **Backend:** Node.js, Express.js
-*   **API Client:** Axios
 *   **Containerization:** Docker
 *   **Deployment:** AWS EC2
